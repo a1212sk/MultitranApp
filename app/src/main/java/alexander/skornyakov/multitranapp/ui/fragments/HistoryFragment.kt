@@ -1,6 +1,7 @@
 package alexander.skornyakov.multitranapp.ui.fragments
 
 import alexander.skornyakov.multitranapp.R
+import alexander.skornyakov.multitranapp.ui.adapters.HistoryListAdapter
 import alexander.skornyakov.multitranapp.viewmodels.HistoryViewModel
 import android.os.Bundle
 import android.view.View
@@ -19,14 +20,12 @@ class HistoryFragment : Fragment(R.layout.fragment_history){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var adapter = ArrayAdapter<String>(requireContext(),android.R.layout.simple_list_item_1)
-        lstHistory.adapter = adapter
+
 
         historyViewModel.history.observe(viewLifecycleOwner, Observer {
             if(it!=null){
-                for(item in it){
-                    adapter.add(item.word)
-                }
+                var adapter = HistoryListAdapter(requireContext(),it)
+                lstHistory.adapter = adapter
             }
         })
 

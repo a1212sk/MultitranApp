@@ -8,5 +8,7 @@ data class HistoryItem(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val timestamp: Long,
+    val langFrom: Int,
+    val langTo: Int,
     val word: String
 )

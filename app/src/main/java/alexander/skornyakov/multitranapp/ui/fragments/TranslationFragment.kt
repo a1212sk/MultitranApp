@@ -61,7 +61,7 @@ class TranslationFragment : Fragment(R.layout.fragment_translation) {
 
     private fun translate() {
         if (!ConnectionHelper.internetAvailable(requireContext())) {
-            activity?.runOnUiThread{
+            activity?.runOnUiThread {
                 Toast.makeText(
                     requireContext(),
                     getString(R.string.InternetConnectionRequired),
@@ -77,8 +77,14 @@ class TranslationFragment : Fragment(R.layout.fragment_translation) {
             translationViewModel.fromLanguage,
             translationViewModel.toLanguage
         )
-        if(text.isNotEmpty()) {
-            val historyItem = HistoryItem(0, System.currentTimeMillis(), teText.text.toString())
+        if (text.isNotEmpty()) {
+            val historyItem = HistoryItem(
+                0,
+                System.currentTimeMillis(),
+                translationViewModel.fromLanguage.id,
+                translationViewModel.toLanguage.id,
+                teText.text.toString()
+            )
             translationViewModel.addHistoryItem(historyItem)
         }
     }
