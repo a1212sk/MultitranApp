@@ -1,9 +1,8 @@
 package alexander.skornyakov.multitranapp.viewmodels
 
-import alexander.skornyakov.multitranapp.data.HistoryItem
-import alexander.skornyakov.multitranapp.data.HistoryRoomDatabase
-import alexander.skornyakov.multitranapp.data.Language
-import alexander.skornyakov.multitranapp.data.Word
+import alexander.skornyakov.multitranapp.data.entities.HistoryItem
+import alexander.skornyakov.multitranapp.data.entities.Language
+import alexander.skornyakov.multitranapp.data.entities.Word
 import alexander.skornyakov.multitranapp.repository.HistoryRepository
 import alexander.skornyakov.multitranapp.repository.TranslationRepository
 import androidx.hilt.lifecycle.ViewModelInject
@@ -11,7 +10,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.*
-import javax.inject.Inject
 
 class TranslationViewModel
 @ViewModelInject constructor(

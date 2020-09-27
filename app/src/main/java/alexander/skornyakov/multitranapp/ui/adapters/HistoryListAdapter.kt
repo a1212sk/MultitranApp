@@ -1,8 +1,8 @@
 package alexander.skornyakov.multitranapp.ui.adapters
 
 import alexander.skornyakov.multitranapp.R
-import alexander.skornyakov.multitranapp.data.HistoryItem
-import alexander.skornyakov.multitranapp.data.Language
+import alexander.skornyakov.multitranapp.data.entities.HistoryItem
+import alexander.skornyakov.multitranapp.data.entities.Language
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View

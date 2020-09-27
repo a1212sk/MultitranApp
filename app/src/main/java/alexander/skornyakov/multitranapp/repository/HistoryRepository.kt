@@ -1,6 +1,6 @@
 package alexander.skornyakov.multitranapp.repository
 
-import alexander.skornyakov.multitranapp.data.HistoryItem
+import alexander.skornyakov.multitranapp.data.entities.HistoryItem
 import alexander.skornyakov.multitranapp.data.HistoryRoomDatabase
 import javax.inject.Inject
 

@@ -1,13 +1,12 @@
 package alexander.skornyakov.multitranapp.ui.fragments
 
 import alexander.skornyakov.multitranapp.R
-import alexander.skornyakov.multitranapp.data.HistoryItem
-import alexander.skornyakov.multitranapp.data.Language
+import alexander.skornyakov.multitranapp.data.entities.HistoryItem
+import alexander.skornyakov.multitranapp.data.entities.Language
 import alexander.skornyakov.multitranapp.helpers.ConnectionHelper
 import alexander.skornyakov.multitranapp.ui.adapters.MeaningsRVAdapter
 import alexander.skornyakov.multitranapp.viewmodels.TranslationViewModel
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -106,13 +105,14 @@ class TranslationFragment : Fragment(R.layout.fragment_translation) {
             translationViewModel.toLanguage
         )
         if (text.isNotEmpty()) {
-            val historyItem = HistoryItem(
-                0,
-                System.currentTimeMillis(),
-                translationViewModel.fromLanguage.id,
-                translationViewModel.toLanguage.id,
-                teText.text.toString()
-            )
+            val historyItem =
+                HistoryItem(
+                    0,
+                    System.currentTimeMillis(),
+                    translationViewModel.fromLanguage.id,
+                    translationViewModel.toLanguage.id,
+                    teText.text.toString()
+                )
             translationViewModel.addHistoryItem(historyItem)
         }
     }

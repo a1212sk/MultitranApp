@@ -1,5 +1,6 @@
 package alexander.skornyakov.multitranapp.data
 
+import alexander.skornyakov.multitranapp.data.entities.HistoryItem
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room

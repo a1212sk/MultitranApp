@@ -1,4 +1,4 @@
-package alexander.skornyakov.multitranapp.data
+package alexander.skornyakov.multitranapp.data.entities
 
 enum class Language(val langName: String, val id: Int, val code: String) {
     RUSSIAN("Русский", 2, "RUS"),

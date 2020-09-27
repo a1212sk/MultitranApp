@@ -1,4 +1,4 @@
-package alexander.skornyakov.multitranapp.data
+package alexander.skornyakov.multitranapp.data.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

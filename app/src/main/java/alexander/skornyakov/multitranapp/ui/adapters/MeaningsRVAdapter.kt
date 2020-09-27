@@ -1,7 +1,7 @@
 package alexander.skornyakov.multitranapp.ui.adapters
 
 import alexander.skornyakov.multitranapp.R
-import alexander.skornyakov.multitranapp.data.Meaning
+import alexander.skornyakov.multitranapp.data.entities.Meaning
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

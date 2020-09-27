@@ -1,11 +1,9 @@
 package alexander.skornyakov.multitranapp.repository
 
-import alexander.skornyakov.multitranapp.data.Language
-import alexander.skornyakov.multitranapp.data.Meaning
-import alexander.skornyakov.multitranapp.data.Word
+import alexander.skornyakov.multitranapp.data.entities.Language
+import alexander.skornyakov.multitranapp.data.entities.Word
 import alexander.skornyakov.multitranapp.helpers.Constants
 import alexander.skornyakov.multitranapp.helpers.HtmlHelper
-import android.util.Log
 import org.jsoup.Jsoup
 
 class TranslationRepository() {
@@ -19,7 +17,12 @@ class TranslationRepository() {
         connection.data("s", text)
         val doc = connection.get()
         val meanings = HtmlHelper.getMeaningsFromDocument(doc)
-        val word = Word(from, to, text, meanings)
+        val word = Word(
+            from,
+            to,
+            text,
+            meanings
+        )
         return word
     }
 

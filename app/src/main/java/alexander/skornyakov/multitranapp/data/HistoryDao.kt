@@ -1,5 +1,6 @@
 package alexander.skornyakov.multitranapp.data
 
+import alexander.skornyakov.multitranapp.data.entities.HistoryItem
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy

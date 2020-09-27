@@ -1,7 +1,6 @@
 package alexander.skornyakov.multitranapp.viewmodels
 
-import alexander.skornyakov.multitranapp.data.HistoryItem
-import alexander.skornyakov.multitranapp.data.HistoryRoomDatabase
+import alexander.skornyakov.multitranapp.data.entities.HistoryItem
 import alexander.skornyakov.multitranapp.repository.HistoryRepository
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
@@ -11,7 +10,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 class HistoryViewModel
 @ViewModelInject constructor(val historyRepository: HistoryRepository) : ViewModel() {

@@ -1,4 +1,4 @@
-package alexander.skornyakov.multitranapp.data
+package alexander.skornyakov.multitranapp.data.entities
 
 import javax.security.auth.Subject
 

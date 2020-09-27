@@ -1,6 +1,6 @@
 package alexander.skornyakov.multitranapp.helpers
 
-import alexander.skornyakov.multitranapp.data.Meaning
+import alexander.skornyakov.multitranapp.data.entities.Meaning
 import org.jsoup.nodes.Document
 
 class HtmlHelper {
@@ -20,7 +20,11 @@ class HtmlHelper {
                         meaningElements.forEach {
                             meaningStr.append(it.text()).append("; ")
                         }
-                        val meaning = Meaning(meaningStr.toString(), subj)
+                        val meaning =
+                            Meaning(
+                                meaningStr.toString(),
+                                subj
+                            )
                         meanings.add(meaning)
                     }
                     counter++
