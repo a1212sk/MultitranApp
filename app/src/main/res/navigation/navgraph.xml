@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navgraph"
+    app:startDestination="@id/translationFragment">
+
+    <fragment
+        android:id="@+id/translationFragment"
+        android:name="alexander.skornyakov.multitranapp.ui.fragments.TranslationFragment"
+        android:label="TranslationFragment" />
+</navigation>

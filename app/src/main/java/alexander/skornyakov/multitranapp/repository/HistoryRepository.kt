@@ -1,0 +1,3 @@
+package alexander.skornyakov.multitranapp.repository
+
+class HistoryRepository
