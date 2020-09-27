@@ -1,14 +1,12 @@
 package alexander.skornyakov.multitranapp.ui.fragments
 
 import alexander.skornyakov.multitranapp.R
+import alexander.skornyakov.multitranapp.data.HistoryItem
 import alexander.skornyakov.multitranapp.data.Language
-import alexander.skornyakov.multitranapp.data.Meaning
 import alexander.skornyakov.multitranapp.helpers.ConnectionHelper
 import alexander.skornyakov.multitranapp.ui.adapters.MeaningsRVAdapter
 import alexander.skornyakov.multitranapp.viewmodels.TranslationViewModel
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
@@ -73,11 +71,16 @@ class TranslationFragment : Fragment(R.layout.fragment_translation) {
             return
         }
         tvLang.text = translationViewModel.fromLanguage.code
+        val text = teText.text.toString()
         translationViewModel.translate(
-            teText.text.toString(),
+            text,
             translationViewModel.fromLanguage,
             translationViewModel.toLanguage
         )
+        if(text.isNotEmpty()) {
+            val historyItem = HistoryItem(0, System.currentTimeMillis(), teText.text.toString())
+            translationViewModel.addHistoryItem(historyItem)
+        }
     }
 
     private fun subscribeSpinnersListeners() {

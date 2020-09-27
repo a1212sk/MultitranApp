@@ -7,4 +7,8 @@
         android:id="@+id/translationFragment"
         android:name="alexander.skornyakov.multitranapp.ui.fragments.TranslationFragment"
         android:label="TranslationFragment" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="alexander.skornyakov.multitranapp.ui.fragments.HistoryFragment"
+        android:label="HistoryFragment" />
 </navigation>

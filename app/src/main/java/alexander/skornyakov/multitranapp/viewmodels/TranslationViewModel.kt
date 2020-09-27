@@ -1,5 +1,7 @@
 package alexander.skornyakov.multitranapp.viewmodels
 
+import alexander.skornyakov.multitranapp.data.HistoryItem
+import alexander.skornyakov.multitranapp.data.HistoryRoomDatabase
 import alexander.skornyakov.multitranapp.data.Language
 import alexander.skornyakov.multitranapp.data.Word
 import alexander.skornyakov.multitranapp.repository.HistoryRepository
@@ -9,9 +11,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
 class TranslationViewModel
-@ViewModelInject constructor(val translationRepository: TranslationRepository) : ViewModel() {
+@ViewModelInject constructor(
+    val translationRepository: TranslationRepository,
+    val historyRepository: HistoryRepository
+) : ViewModel() {
 
     private var translationJob = Job()
 
@@ -27,10 +33,14 @@ class TranslationViewModel
         translationJob = Job()
         CoroutineScope(Dispatchers.IO + translationJob).launch {
             val word = translationRepository.translate(text, from, to)
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
                 _word.value = word
             }
         }
+    }
+
+    fun addHistoryItem(historyItem: HistoryItem) = CoroutineScope(Dispatchers.IO).launch {
+        historyRepository.addHistoryItem(historyItem)
     }
 
 
