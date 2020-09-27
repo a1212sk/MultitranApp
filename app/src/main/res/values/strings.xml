@@ -7,4 +7,5 @@
         <item value="3">Немецкий</item>
     </string-array>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="InternetConnectionRequired">Для работы переводчика необходимо Интернет соединение!</string>
 </resources>

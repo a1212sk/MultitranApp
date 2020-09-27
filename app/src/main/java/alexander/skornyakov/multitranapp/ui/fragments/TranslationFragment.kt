@@ -3,12 +3,15 @@ package alexander.skornyakov.multitranapp.ui.fragments
 import alexander.skornyakov.multitranapp.R
 import alexander.skornyakov.multitranapp.data.Language
 import alexander.skornyakov.multitranapp.data.Meaning
+import alexander.skornyakov.multitranapp.helpers.ConnectionHelper
 import alexander.skornyakov.multitranapp.ui.adapters.MeaningsRVAdapter
 import alexander.skornyakov.multitranapp.viewmodels.TranslationViewModel
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,6 +19,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_translation.*
+import java.util.*
+
 
 @AndroidEntryPoint
 class TranslationFragment : Fragment(R.layout.fragment_translation) {
@@ -25,8 +30,7 @@ class TranslationFragment : Fragment(R.layout.fragment_translation) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter =
-            MeaningsRVAdapter()
+        val adapter = MeaningsRVAdapter()
         rvMeanings.layoutManager = LinearLayoutManager(requireContext())
         rvMeanings.adapter = adapter
 
@@ -40,57 +44,88 @@ class TranslationFragment : Fragment(R.layout.fragment_translation) {
 
         langFromSpinner.setSelection(1) //rus
 
+        var timer = Timer()
         teText.doOnTextChanged { text, start, before, count ->
-            text?.let {
-               translate()
-            }
-        }
-
-        langFromSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                val lang = Language.values().find { it.langName == langFromSpinner.selectedItem.toString() }
-                lang?.let {
-                    translationViewModel.fromLanguage = it
-                    tvLang.text = it.code
-                    translate()
+            timer.cancel()
+            timer = Timer()
+            timer.schedule(object : TimerTask() {
+                override fun run() {
+                    text?.let {
+                        translate()
+                    }
                 }
-            }
-
+            }, 500)
         }
 
-        langToSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                val lang = Language.values().find { it.langName == langToSpinner.selectedItem.toString() }
-                lang?.let {
-                    translationViewModel.toLanguage = it
-                    translate()
-                }
-            }
-
-        }
+        subscribeSpinnersListeners()
 
     }
 
-    private fun translate(){
+    private fun translate() {
+        if (!ConnectionHelper.internetAvailable(requireContext())) {
+            activity?.runOnUiThread{
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.InternetConnectionRequired),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            return
+        }
         tvLang.text = translationViewModel.fromLanguage.code
         translationViewModel.translate(
             teText.text.toString(),
             translationViewModel.fromLanguage,
             translationViewModel.toLanguage
         )
+    }
+
+    private fun subscribeSpinnersListeners() {
+        langFromSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val lang = Language.values()
+                    .find { it.langName == langFromSpinner.selectedItem.toString() }
+                lang?.let {
+                    translationViewModel.fromLanguage = it
+                    tvLang.text = it.code
+                    teText.text?.let {
+                        if (it.toString().isNotEmpty()) {
+                            translate()
+                        }
+                    }
+                }
+            }
+
+        }
+
+        langToSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val lang =
+                    Language.values().find { it.langName == langToSpinner.selectedItem.toString() }
+                lang?.let {
+                    translationViewModel.toLanguage = it
+                    teText.text?.let {
+                        if (it.toString().isNotEmpty()) {
+                            translate()
+                        }
+                    }
+                }
+            }
+
+        }
     }
 }

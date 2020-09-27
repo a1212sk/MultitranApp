@@ -26,6 +26,10 @@ class MeaningsRVAdapter : RecyclerView.Adapter<MeaningsRVAdapter.MeaningViewHold
         return differ.currentList.size
     }
 
+    fun clear(){
+        clear()
+    }
+
     override fun onBindViewHolder(holder: MeaningViewHolder, position: Int) {
         val meaning = differ.currentList[position]
         holder.itemView.apply {
