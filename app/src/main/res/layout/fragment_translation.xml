@@ -43,18 +43,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/langFromSpinner" />
 
+    <TextView
+        android:id="@+id/tvLang"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/teText" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMeanings"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/teText"
-        tools:listitem="@layout/item_recyclerview_meaning" />
+        app:layout_constraintTop_toBottomOf="@+id/tvLang"
+        tools:listitem="@layout/item_recyclerview_meaning">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

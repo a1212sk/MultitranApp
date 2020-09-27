@@ -38,7 +38,7 @@ class TranslationFragment : Fragment(R.layout.fragment_translation) {
             }
         })
 
-        langFromSpinner.setSelection(1) //
+        langFromSpinner.setSelection(1) //rus
 
         teText.doOnTextChanged { text, start, before, count ->
             text?.let {
@@ -58,6 +58,7 @@ class TranslationFragment : Fragment(R.layout.fragment_translation) {
                 val lang = Language.values().find { it.langName == langFromSpinner.selectedItem.toString() }
                 lang?.let {
                     translationViewModel.fromLanguage = it
+                    tvLang.text = it.code
                     translate()
                 }
             }
@@ -85,6 +86,7 @@ class TranslationFragment : Fragment(R.layout.fragment_translation) {
     }
 
     private fun translate(){
+        tvLang.text = translationViewModel.fromLanguage.code
         translationViewModel.translate(
             teText.text.toString(),
             translationViewModel.fromLanguage,
