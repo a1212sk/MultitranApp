@@ -19,8 +19,7 @@ class TranslationRepository() {
         connection.data("s", text)
         val doc = connection.get()
         val meanings = HtmlHelper.getMeaningsFromDocument(doc)
-        val subject = HtmlHelper.getSubjectFromDocument(doc)
-        val word = Word(from, to, text, subject, meanings)
+        val word = Word(from, to, text, meanings)
         return word
     }
 

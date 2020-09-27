@@ -8,10 +8,10 @@ class HtmlHelper {
         fun getMeaningsFromDocument(doc: Document): List<Meaning>? {
             val meanings = mutableListOf<Meaning>()
             var tableRows = doc.select("table[width*=100%] > tbody > tr")
-            if (tableRows.size > 2) {
+            if (tableRows.size > 2) { //first two are garbage
                 var counter = 2
                 while (counter < tableRows.size
-                    && tableRows[counter].selectFirst("td > b") == null
+                    && tableRows[counter].selectFirst("td > b") == null //cut thesaurus and others
                 ) {
                     if (tableRows[counter].select("td.trans > a").size > 0) {
                         val subj = tableRows[counter].select("td.subj > a").text()
@@ -30,8 +30,5 @@ class HtmlHelper {
             return meanings
         }
 
-        fun getSubjectFromDocument(doc: Document): String {
-            return ""
-        }
     }
 }
