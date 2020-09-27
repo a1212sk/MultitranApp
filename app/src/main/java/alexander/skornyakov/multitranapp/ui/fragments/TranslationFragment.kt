@@ -49,8 +49,10 @@ class TranslationFragment : Fragment(R.layout.fragment_translation) {
             timer = Timer()
             timer.schedule(object : TimerTask() {
                 override fun run() {
-                    text?.let {
-                        translate()
+                    activity?.runOnUiThread {
+                        text?.let {
+                            translate()
+                        }
                     }
                 }
             }, 500)
