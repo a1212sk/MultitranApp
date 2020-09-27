@@ -9,12 +9,13 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_history.*
 
 
 @AndroidEntryPoint
-class HistoryFragment : Fragment(R.layout.fragment_history){
+class HistoryFragment : Fragment(R.layout.fragment_history) {
 
     val historyViewModel: HistoryViewModel by viewModels()
 
@@ -23,8 +24,16 @@ class HistoryFragment : Fragment(R.layout.fragment_history){
 
 
         historyViewModel.history.observe(viewLifecycleOwner, Observer {
-            if(it!=null){
-                var adapter = HistoryListAdapter(requireContext(),it)
+            if (it != null) {
+                var adapter = HistoryListAdapter(requireContext(), it)
+                adapter.itemClickListener = {
+                    var action = HistoryFragmentDirections.actionHistoryFragmentToTranslationFragment(
+                        it.word,
+                        it.langFrom,
+                        it.langTo
+                    )
+                    activity?.findNavController(R.id.navHost)?.navigate(action)
+                }
                 lstHistory.adapter = adapter
             }
         })

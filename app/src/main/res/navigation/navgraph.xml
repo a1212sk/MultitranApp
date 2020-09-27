@@ -6,9 +6,23 @@
     <fragment
         android:id="@+id/translationFragment"
         android:name="alexander.skornyakov.multitranapp.ui.fragments.TranslationFragment"
-        android:label="TranslationFragment" />
+        android:label="TranslationFragment" >
+        <argument
+            android:name="word"
+            app:argType="string" />
+        <argument
+            android:name="langFrom"
+            app:argType="integer" />
+        <argument
+            android:name="langTo"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/historyFragment"
         android:name="alexander.skornyakov.multitranapp.ui.fragments.HistoryFragment"
-        android:label="HistoryFragment" />
+        android:label="HistoryFragment" >
+        <action
+            android:id="@+id/action_historyFragment_to_translationFragment"
+            app:destination="@id/translationFragment" />
+    </fragment>
 </navigation>

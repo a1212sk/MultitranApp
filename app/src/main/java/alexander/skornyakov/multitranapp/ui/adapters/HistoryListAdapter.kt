@@ -12,6 +12,9 @@ import android.widget.TextView
 
 class HistoryListAdapter(context: Context, items: List<HistoryItem>) :
     ArrayAdapter<HistoryItem>(context, R.layout.item_list_history, items) {
+
+    var itemClickListener : (HistoryItem)->Unit = {}
+
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         var v = convertView
         if (v == null) {
@@ -19,7 +22,7 @@ class HistoryListAdapter(context: Context, items: List<HistoryItem>) :
         }
         val item = getItem(position)
         if (item != null) {
-            v?.setOnClickListener { }
+            v?.setOnClickListener { itemClickListener(item) }
             v?.findViewById<TextView>(R.id.tvWord)?.text = item.word
             v?.findViewById<TextView>(R.id.tvFrom)?.text =
                 Language.values().find { it.id == item.langFrom }?.langName

@@ -7,8 +7,10 @@ import alexander.skornyakov.multitranapp.helpers.ConnectionHelper
 import alexander.skornyakov.multitranapp.ui.adapters.MeaningsRVAdapter
 import alexander.skornyakov.multitranapp.viewmodels.TranslationViewModel
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
@@ -56,6 +58,32 @@ class TranslationFragment : Fragment(R.layout.fragment_translation) {
         }
 
         subscribeSpinnersListeners()
+
+        arguments?.let { arguments ->
+            val word = arguments.getString("word")
+            word?.let {
+
+                teText.setText(word)
+
+                val fromLang = arguments.getInt("langFrom")
+                fromLang?.let {
+                    val langName = Language.values().find { it.id == fromLang }?.langName
+                    val fromPosition = (langFromSpinner.adapter as ArrayAdapter<String>)
+                        .getPosition(langName)
+                    langFromSpinner.setSelection(fromPosition)
+                }
+
+                val toLang = arguments.getInt("langTo")
+                toLang?.let {
+                    val langName = Language.values().find { it.id == toLang }?.langName
+                    val toPosition = (langToSpinner.adapter as ArrayAdapter<String>)
+                        .getPosition(langName)
+                    langToSpinner.setSelection(toPosition)
+                }
+            }
+
+
+        }
 
     }
 
