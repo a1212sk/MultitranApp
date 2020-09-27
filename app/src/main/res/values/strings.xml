@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MultitranApp</string>
+    <string name="app_name">Multitran Translator</string>
     <string-array name="languages">
         <item value="1">Английский</item>
         <item value="2">Русский</item>
